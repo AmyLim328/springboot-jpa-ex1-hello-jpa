@@ -1,21 +1,22 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, columnDefinition = "varchar(100) default ‘EMPTY'")
+    @Column(name = "name", nullable = false)
     private String username;
 
-    private Integer age;
+    private int age;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -24,8 +25,15 @@ public class Member {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModifiedDate;
 
+    // 최신 버전 (자바 8 이상)
+    private LocalDate testLocalDate; // 년, 월
+    private LocalDateTime testLocalDateTime; // 년, 월, 일
+
     @Lob
     private String description;
+
+    @Transient
+    private int temp;
 
     public Member() { // JPA 스펙 상 기본 생성자 필요
     }
@@ -46,11 +54,11 @@ public class Member {
         this.username = username;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -84,5 +92,13 @@ public class Member {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getTemp() {
+        return temp;
+    }
+
+    public void setTemp(int temp) {
+        this.temp = temp;
     }
 }
