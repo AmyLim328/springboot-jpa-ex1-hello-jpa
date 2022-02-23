@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -27,11 +28,15 @@ public class JpaMain {
 
             em.flush();
             em.clear();
+            //// 이렇게 해야 DB에서 값을 깔끔하게 가져올 수 있음 ////
 
             //조회
             Member findMember = em.find(Member.class, member.getId());
-            Team findTeam = em.find(Team.class, team.getId());
-            int memberSize = findTeam.getMembers().size(); //역방향 조회
+            List<Member> members = findMember.getTeam().getMembers();
+
+            for (Member m : members) {
+                System.out.println("m = " + m.getUsername());
+            }
 
             tx.commit();
         } catch (Exception e) {
