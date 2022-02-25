@@ -17,14 +17,17 @@ public class JpaMain {
 
         try {
             //저장
-            Member member = new Member();
-            member.setUsername("member1");
-            em.persist(member);
-
             Team team = new Team();
             team.setName("TeamA");
-            team.getMembers().add(member);
+//            team.getMembers().add(member);
             em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
+
+            team.getMembers().add(member);
 
             em.flush();
             em.clear();
