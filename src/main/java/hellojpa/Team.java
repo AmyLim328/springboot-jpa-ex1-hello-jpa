@@ -12,8 +12,8 @@ public class Team {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "team")
-    List<Member> members = new ArrayList<>();
+    @OneToMany(mappedBy = "team") // 변수명 team과 연결돼있음을 뜻함
+    List<Member> members = new ArrayList<>(); // 관례 : ArrayList로 초기화 // 이래야 null point 안 뜲
 
     public Long getId() {
         return id;
