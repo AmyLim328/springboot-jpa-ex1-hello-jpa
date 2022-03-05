@@ -39,8 +39,12 @@ public class Member {
         return team;
     }
 
-    public void changeTeam(Team team) { // 연관관계 메서드 // 단순한 getter setter가 아님을 나타내기 위해 이름 변경
+    public void setTeam(Team team) {
         this.team = team;
-        team.getMembers().add(this);
     }
+
+//    public void changeTeam(Team team) { // 연관관계 메서드 // 단순한 getter setter가 아님을 나타내기 위해 이름 변경
+//        this.team = team;
+//        team.getMembers().add(this);
+//    }
 }
