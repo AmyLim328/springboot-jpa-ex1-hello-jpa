@@ -23,8 +23,10 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("member1");
-            member.changeTeam(team); // **
+//            member.changeTeam(team); // **
             em.persist(member);
+
+            team.addMember(member);
 
 //            team.getMembers().add(member); // ** // 연관관계 편의 메서드에 넣음
 
