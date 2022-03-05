@@ -13,7 +13,12 @@ public class Team {
     private String name;
 
     @OneToMany(mappedBy = "team") // 변수명 team과 연결돼있음을 뜻함
-    List<Member> members = new ArrayList<>(); // 관례 : ArrayList로 초기화 // 이래야 null point 안 뜲
+    private List<Member> members = new ArrayList<>(); // 관례 : ArrayList로 초기화 // 이래야 null point 안 뜲
+
+    public void addMember(Member member) {
+        member.setTeam(this);
+        members.add(member);
+    }
 
     public Long getId() {
         return id;
@@ -38,4 +43,5 @@ public class Team {
     public void setMembers(List<Member> members) {
         this.members = members;
     }
+
 }
