@@ -12,13 +12,6 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
-
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
-    private Team team;
-
     public Long getId() {
         return id;
     }
@@ -35,13 +28,9 @@ public class Member {
         this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
-    }
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
+
+
 
 //    public void changeTeam(Team team) { // 연관관계 메서드 // 단순한 getter setter가 아님을 나타내기 위해 이름 변경
 //        this.team = team;

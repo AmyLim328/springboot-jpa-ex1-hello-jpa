@@ -12,13 +12,14 @@ public class Team {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "team") // 변수명 team과 연결돼있음을 뜻함
-    private List<Member> members = new ArrayList<>(); // 관례 : ArrayList로 초기화 // 이래야 null point 안 뜲
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID")
+    private List<Member> members = new ArrayList<>(); // 관례 : ArrayList로 초기화 // 이래야 nullPointerException 안 뜲
 
-    public void addMember(Member member) { // changeTeam or addMember // 어떤 메서드를 통해서 할 지는 내 마음
-        member.setTeam(this);
-        members.add(member);
-    }
+//    public void addMember(Member member) { // changeTeam or addMember // 어떤 메서드를 통해서 할 지는 내 마음
+//        member.setTeam(this);
+//        members.add(member);
+//    }
 
     public Long getId() {
         return id;

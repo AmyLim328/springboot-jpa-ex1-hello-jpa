@@ -16,32 +16,17 @@ public class JpaMain {
         tx.begin();
 
         try {
-            //저장
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
 
             Member member = new Member();
             member.setUsername("member1");
-//            member.changeTeam(team); // **
+
             em.persist(member);
 
-            team.addMember(member);
+            Team team = new Team();
+            team.setName("teamA");
+            team.getMembers().add(member);
 
-//            team.getMembers().add(member); // ** // 연관관계 편의 메서드에 넣음
-
-            em.flush();
-            em.clear();
-            //// 이렇게 해야 DB에서 값을 깔끔하게 가져올 수 있음 ////
-
-            Team findTeam = em.find(Team.class, team.getId()); // 1차 캐시
-            List<Member> members = findTeam.getMembers();
-
-            System.out.println("===============================");
-            for (Member m : members) {
-                System.out.println("m = " + m.getUsername());
-            }
-            System.out.println("===============================");
+            em.persist(team);
 
             tx.commit();
         } catch (Exception e) {
