@@ -7,8 +7,7 @@ import javax.persistence.*;
 @DiscriminatorColumn
 public abstract class Item {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
     private String name;
