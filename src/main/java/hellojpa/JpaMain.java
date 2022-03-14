@@ -15,18 +15,25 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member1 = new Member();
-            member1.setUsername("hello1");
+            Team team = new Team();
+            team.setName("team A");
+            em.persist(team);
 
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            member1.setTeam(team);
             em.persist(member1);
 
             em.flush();
             em.clear();
             // 영속성 컨택스트에 있는 걸 DB로 날리기 때문에 1차캐시에 아무것도 안 남게됨
 
-            Member refMember = em.getReference(Member.class, member1.getId());
-            System.out.println("refMember = " + refMember.getClass()); // proxy
-            Hibernate.initialize(refMember); // 강제초기화
+            Member m = em.find(Member.class, member1.getId());
+            System.out.println("m = " + m.getTeam().getClass());
+
+            System.out.println("=================");
+            m.getTeam().getName(); // 초기화
+            System.out.println("=================");
 
             tx.commit();
         } catch (Exception e) {
