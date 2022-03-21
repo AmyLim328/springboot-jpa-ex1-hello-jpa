@@ -17,25 +17,8 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // Criteria 사용 준비
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Member> query = cb.createQuery(Member.class);
-
-            // 루트 클래스 (조회를 시작할 클래스)
-            Root<Member> m = query.from(Member.class);
-
-            // 쿼리 생성
-            CriteriaQuery<Member> cq = query.select(m);
-
-            // 동적 쿼리
-            String username = "abc";
-            if (username != null) {
-                cq = cq.where(cb.equal(m.get("username"), "kim"));
-            }
-
-            List<Member> resultList = em.createQuery(cq).getResultList();
-
-            // 실무에서 Criteria 사용하길 권장하지 않음 sql스럽지 않고 알아보기 어려워서 유지보수 힘듦
+            em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME from MEMBER")
+                    .getResultList();
 
             tx.commit();
         } catch (Exception e) {
